@@ -37,7 +37,7 @@ public class Userprofile extends AppCompatActivity {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+               editProfile();
             }
         });
 
@@ -65,6 +65,11 @@ public class Userprofile extends AppCompatActivity {
 
 
     }
+    public void editProfile(){
+        Intent intent = new Intent(this,editUserProfile.class);
+        startActivity(intent);
+    }
+
     public void LoginPage(){
         Intent intent = new Intent(this,SignIn.class);
         startActivity(intent);

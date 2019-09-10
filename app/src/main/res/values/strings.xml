@@ -26,6 +26,7 @@
 
     <!--menu strings-->
     <string name="edit">Edit</string>
+    <string name="update">Update</string>
     <string name="delete">Delete</string>
     <string name="done">Done</string>
     <string name="addItem">Add Item</string>

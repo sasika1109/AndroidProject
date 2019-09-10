@@ -28,6 +28,7 @@
         <!--Sasika UI-->
         <activity android:name=".Userprofile"></activity>
         <activity android:name=".ResetPassword" />
+        <activity android:name=".editUserProfile"/>
         <activity android:name=".SignIn" />
         <activity
             android:name=".Signup"

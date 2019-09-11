@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +88,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
   public Cursor readData(String email){
         SQLiteDatabase db = getReadableDatabase();
-        String[] columns = {UserMaster.User._ID,UserMaster.User.COLUMN_NAME_USERNAME,UserMaster.User.COLUMN_NAME_EMAIL};
+        String[] columns = {UserMaster.User._ID,UserMaster.User.COLUMN_NAME_USERNAME,UserMaster.User.COLUMN_NAME_EMAIL,UserMaster.User.COLUMN_NAME_PASSWORD};
         String select = UserMaster.User.COLUMN_NAME_EMAIL+" Like ? ";
         String[] selectionArgs = {email};
         Cursor cursor = db.query(UserMaster.User.TABLE_NAME,columns,select,selectionArgs,null,null,null);
@@ -96,6 +97,29 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
 
+    }
+
+    public int updateUser(String UserIdU,String nameU, String emailU,String passwordU){
+        SQLiteDatabase db = getReadableDatabase();
+
+
+
+        ContentValues values = new ContentValues();
+        values.put(UserMaster.User.COLUMN_NAME_EMAIL,emailU);
+        values.put(UserMaster.User.COLUMN_NAME_USERNAME,nameU);
+        values.put(UserMaster.User.COLUMN_NAME_PASSWORD,passwordU);
+
+        String select = UserMaster.User._ID + " LIKE ? ";
+        String[] selectionArgs = {UserIdU};
+
+        int count = db.update(
+                UserMaster.User.TABLE_NAME,
+                values,
+                select,
+                selectionArgs
+        );
+
+        return count;
     }
 
 }

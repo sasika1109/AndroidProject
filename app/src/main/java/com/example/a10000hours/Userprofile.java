@@ -17,10 +17,14 @@ import Database.UserMaster;
 
 public class Userprofile extends AppCompatActivity {
 
-    EditText txt_Email;
+    public static final String EXTRA_USERID = "send user id";
+    public static final String EXTRA_PASSWORD = "send user password";
+    public static final String EXTRA_EMAIL = "send email2";
+    public static final String EXTRA_USERNAME = "send email";
+    TextView txt_Email;
     Button deleteButton,editButton;
     DBHelper dbh;
-    String Email;
+    String Email,email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +41,10 @@ public class Userprofile extends AppCompatActivity {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                editProfile();
             }
         });
-
-
-
 
 
         deleteButton.setOnClickListener(new View.OnClickListener() {
@@ -64,10 +66,6 @@ public class Userprofile extends AppCompatActivity {
         });
 
 
-    }
-    public void editProfile(){
-        Intent intent = new Intent(this,editUserProfile.class);
-        startActivity(intent);
     }
 
     public void LoginPage(){
@@ -92,6 +90,30 @@ public class Userprofile extends AppCompatActivity {
             userText2.setText(cursor.getString(1).toString());
            userText1.setText(cursor.getString(1).toString());
           //  Toast.makeText(getApplicationContext(),"aaaaaaaaaaaaaa",Toast.LENGTH_LONG).show();
+        }
+
+
+    }
+    public void editProfile(){
+        Intent intent = new Intent(this,editUserProfile.class);
+       /* txt_Email = findViewById(R.id.displayEmail);
+        email = txt_Email.getText().toString().trim();
+        TextView userText3 = (TextView)findViewById(R.id.displayEmail);*/
+       // Cursor cursor = dbh.readData(Email);
+
+       // TextView userText2 = (TextView)findViewById(R.id.displayUsername);
+
+        Cursor cursor = dbh.readData(Email);
+        StringBuffer buffer = new StringBuffer();
+        while(cursor.moveToNext()){
+//            userText2.setText(cursor.getString(1).toString());
+            intent.putExtra(EXTRA_USERID,cursor.getString(0).toString());
+            intent.putExtra(EXTRA_PASSWORD,cursor.getString(3).toString());
+            intent.putExtra(EXTRA_USERNAME,cursor.getString(1).toString());
+            intent.putExtra(EXTRA_EMAIL,cursor.getString(2).toString());
+
+            startActivity(intent);
+
         }
 
 
